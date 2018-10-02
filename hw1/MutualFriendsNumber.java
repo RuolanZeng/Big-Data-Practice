@@ -70,24 +70,26 @@ public class MutualFriendsNumber {
 	}
 	
 	public static class Map2
-	extends Mapper<LongWritable, Text, IntWritable, Text>{
+	extends Mapper<LongWritable, Text, LongWritable, Text>{
 		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-					
+			
+			LongWritable frequency = new LongWritable();
 			String[] mydata = value.toString().split("\t");
 			
-			IntWritable outputkey = new IntWritable(Integer.parseInt(mydata[1]));
+			int outputkey = Integer.parseInt(mydata[1]);
 			String outputvalue = mydata[0];
 //			System.out.println("outputkey= "+outputkey);
 //			System.out.println("outputvalue= "+outputvalue);
-			context.write(outputkey,new Text(outputvalue));
+			frequency.set(outputkey);
+			context.write(frequency,new Text(outputvalue));
 		}
 	}
 	
 	public static class Reduce2
-	extends Reducer<IntWritable,Text,Text,IntWritable> {
+	extends Reducer<LongWritable,Text,Text,LongWritable> {
 		int mCount = 0;
 
-		public void reduce(IntWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+		public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 			
 			for (Text val:values) {
 				if(mCount < 10) {
@@ -148,12 +150,12 @@ public class MutualFriendsNumber {
 			job2.setReducerClass(Reduce2.class);
 			
 			
-			job2.setMapOutputKeyClass(IntWritable.class);
+			job2.setMapOutputKeyClass(LongWritable.class);
 			job2.setMapOutputValueClass(Text.class);
 			// set output key type
 			job2.setOutputKeyClass(Text.class);
 			// set output value type
-			job2.setOutputValueClass(IntWritable.class);
+			job2.setOutputValueClass(LongWritable.class);
 //			job2.setSortComparatorClass(IntWritableDecreasingComparator.class);
 			job2.setSortComparatorClass(LongWritable.DecreasingComparator.class);
 			//set the HDFS path of the input data
