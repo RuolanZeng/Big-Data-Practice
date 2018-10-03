@@ -76,7 +76,7 @@ public class ReduceSideJoin {
 		        	String[] arr=line.split(",");
 		        	String[] dob = arr[9].split("/");
 		        	int year = Integer.parseInt(dob[2]);
-		        	int age = 2018-year+1;
+		        	int age = 2018-year;
 		        	//put (id, age) in the HashMap variable
 		        	map.put(new LongWritable(Integer.parseInt(arr[0])), new LongWritable(age));
 		        	line=br.readLine();
