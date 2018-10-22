@@ -10,17 +10,44 @@ if __name__ == "__main__":
         .getOrCreate()
 
     # spark
+    # ds = spark.read.text('business.csv')
+    # business_rdd = ds.rdd.map(lambda x: x[0]).map(lambda x: x.split("::")).filter(lambda x: 'Stanford, CA' in x[1]).map(lambda x: (x[0],x[1]))
+    # # print(business_rdd.take(5))
+    #
+    # ds2 = spark.read.text('review.csv')
+    # review_rdd = ds2.rdd.map(lambda x: x[0]).map(lambda x: x.split("::")).map(lambda x: (x[2],(x[1],x[3])))
+    # # print(review_rdd.take(5))
+    #
+    # join_rdd = business_rdd.join(review_rdd).map(lambda x: x[1][1])
+    # # print(join_rdd.count())
+    #
+    # # join_rdd.saveAsTextFile("./result/q3")
+    # print(join_rdd.take(5))
+    # spark.stop()
+
+    # spark sql
+
     ds = spark.read.text('business.csv')
-    business_rdd = ds.rdd.map(lambda x: x[0]).map(lambda x: x.split("::")).filter(lambda x: 'Stanford' in x[1]).map(lambda x: (x[0],x[1]))
-    print(business_rdd.take(5))
+    business_rdd = ds.rdd.map(lambda x: x[0]).map(lambda x: x.split("::"))
+    business_df = spark.createDataFrame(business_rdd)
+    # business_df.show()
 
     ds2 = spark.read.text('review.csv')
-    review_rdd = ds2.rdd.map(lambda x: x[0]).map(lambda x: x.split("::")).map(lambda x: (x[2],(x[1],x[3])))
-    print(review_rdd.take(5))
+    review_rdd = ds2.rdd.map(lambda x: x[0]).map(lambda x: x.split("::"))
+    review_df = spark.createDataFrame(review_rdd)
+    # review_df.show()
 
-    join_rdd = business_rdd.join(review_rdd).map(lambda x: x[1][1])
-    print(join_rdd.count())
+    business_df.registerTempTable("business")
+    review_df.registerTempTable("review")
 
-    join_rdd.saveAsTextFile("./result/q3")
-    spark.stop()
+    stanford = spark.sql("SELECT _1 AS business_id FROM  business "
+                         "WHERE _2 LIKE '%Stanford, CA%'")
+
+    stanford.registerTempTable("stanford")
+
+    result = spark.sql("SELECT review._2 AS User_id, review._4 AS Rating "
+                       "FROM review, stanford "
+                       "WHERE review._3 = stanford.business_id")
+    result.show()
+
 
