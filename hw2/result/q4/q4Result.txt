@@ -1,0 +1,10 @@
+[('XpWWL9gv34YsmYOEh-OVJw', 'PO Box 554Princeton, NJ 08542', 'List(Local Services, IT Services & Computer Repair)', 5.0), 
+('MTGpGdDh8oVpDlVgigJo5Q', '903 Mitchell StIthaca, NY 14850', 'List(Flowers & Gifts, Shopping, Florists, Antiques)', 5.0), 
+('Xc9S5SEcXwFpQ2AB07r8Lg', '22 Hilliard StHarvard SquareCambridge, MA 02138', 'List(Nutritionists, Health and Medical)', 5.0), 
+('9133VCCSn7ZhlyBga2MV7Q', '4225 Executive SqSte 600San Diego, CA 92037', 'List(Financial Services, Professional Services, Lawyers, Tax Services, Bankruptcy Law)', 5.0), 
+('mB7S5rLKi3QAUypycYHCSg', '101 N Indian Hill BlvdSte C-101Claremont, CA 91711', 'List(Fashion, Shopping, Shoe Stores)', 5.0), 
+('AHXGBnZyFmXsfGAgyNZTFg', '200 S Oak Knoll AveSte 102PasadenaPasadena, CA 91101', 'List(Health and Medical, Dentists, General Dentistry)', 5.0), 
+('vrqDdDabgrBnwWvh_E5RSQ', '2960 BroadwayMC 5727Morningside HeightsNew York, NY 10027', 'List(Specialty Schools, Education)', 5.0), 
+('OOwa5BDRUHGx6d3LwaJeyg', 'University of TexasAustin, TX 78705', 'List(Home Services, Home Inspectors)', 5.0), 
+('98PyRGUEqm4mBPXVowfQWg', '795 El Camino RealPalo Alto, CA 94301', 'List(Doctors, Health and Medical)', 5.0), 
+('DGxYONwWet7Ihl5eouo9mA', '817 W 34th StSouth Los AngelesLos Angeles, CA 90089', 'List(Vegetarian, Cafes, Restaurants)', 5.0)]
